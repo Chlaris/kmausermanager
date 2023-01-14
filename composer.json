@@ -1,0 +1,15 @@
+{
+    "name": "K M A User Manager",
+    "description": "Manager user",
+    "type": "project",
+    "license": "AGPL",
+    "authors": [
+        {
+            "name": "Vu Thi Giang"
+        }
+    ],
+    "require": {},
+    "require-dev": {
+        "phpunit/phpunit": "^5.4"
+    }
+}

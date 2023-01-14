@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<info xmlns:xsi= "http://www.w3.org/2001/XMLSchema-instance"
+      xsi:noNamespaceSchemaLocation="https://apps.nextcloud.com/schema/apps/info.xsd">
+    <id>kmausermanager</id>
+    <name>K M A User Manager</name>
+    <summary>Manager user</summary>
+    <description><![CDATA[Manager user]]></description>
+    <version>0.0.1</version>
+    <licence>agpl</licence>
+    <author mail="khachdoi@gmail.com" >Vu Thi Giang</author>
+    <namespace>KMAUserManager</namespace>
+    <category>files</category>
+    <bugs>https://example.com</bugs>
+    <dependencies>
+        <nextcloud min-version="22" max-version="22"/>
+    </dependencies>
+    <navigations>
+        <navigation>
+            <name>K M A User Manager</name>
+            <route>kmausermanager.page.index</route>
+        </navigation>
+    </navigations>
+</info>
