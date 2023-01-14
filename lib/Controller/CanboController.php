@@ -4,6 +4,7 @@ namespace OCA\kmausermanager\Controller;
 use OCP\IRequest;
 use OCP\IDBConnection;
 use OCP\AppFramework\Http\DataResponse;
+use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Controller;
 
 // use OCP\IRequest;
@@ -127,5 +128,33 @@ class CanboController  extends Controller{
         return new DataResponse(['status' => 'success']);
     }
 
+
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     *
+     * @param string $username
+     * @param string $ma_cv
+     * @param string $ma_pb
+     * @param string $ho_ten
+     * @param string $sdt
+     * @param string $dia_chi
+     * @param string $cmnd_cccd
+     * @param string $email
+     * @return JSONResponse
+     */
+    public function updateInfoKMA($username, $ma_cv=null, $ma_pb=null, $ho_ten=null, $sdt=null, $dia_chi=null, $cmnd_cccd=null, $email=null) {
+        $query = $this->db->prepare('UPDATE `oc_kma_canbo` SET `ma_cv` = COALESCE(?, `ma_cv`), 
+                                                            `ma_pb` = COALESCE(?, `ma_pb`), 
+                                                            `ho_ten` = COALESCE(?, `ho_ten`),
+                                                            `sdt` = COALESCE(?, `sdt`),
+                                                            `dia_chi` = COALESCE(?, `dia_chi`),
+                                                            `cmnd_cccd` = COALESCE(?, `cmnd_cccd`),
+                                                            `email` = COALESCE(?, `email`)
+                                                                WHERE `username` = ?');
+        $query->execute(array($ma_cv, $ma_pb, $ho_ten, $sdt, $dia_chi, $cmnd_cccd, $email, $username));
+        return new JSONResponse(array('status' => 'success'));
+    }
 
 }

@@ -21,7 +21,10 @@ return [
 		['name' => 'canbo#getAllKMAUser', 'url' => '/all_kma_user', 'verb' => 'GET'],
 		['name' => 'canbo#getKMAUser', 'url' => '/kma_user/{username}', 'verb' => 'GET'],
 		['name' => 'canbo#createCanbo', 'url' => '/create_kma_user', 'verb' => 'POST'],
-		['name' => 'canbo#deleteCanbo', 'url' => '/delete_kma_user', 'verb' => 'DELETE']
+		['name' => 'canbo#deleteCanbo', 'url' => '/delete_kma_user', 'verb' => 'DELETE'],
+		['name' => 'canbo#updateInfoKMA', 'url' => '/update_kma_user/{username}', 'verb' => 'PUT']
+
+
 		
     ],
 
