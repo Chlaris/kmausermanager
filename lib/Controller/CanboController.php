@@ -34,7 +34,7 @@ class CanboController  extends Controller{
 	 * @NoCSRFRequired
 	 */
     public function sayHi() {
-		$message = "Hello Friend hihi";
+		$message = "It's work, brooooo";
         return new DataResponse($message);
     }
 
