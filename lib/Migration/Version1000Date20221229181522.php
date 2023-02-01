@@ -120,7 +120,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 
 			$table->setPrimaryKey(['kma_uid', 'id_number']);
 			// $table->addIndex(['id_number'], 'kma_user');
-			$table->addIndex(['position_id'], 'kma_user');
+			// $table->addIndex(['position_id'], 'kma_user');
 			// $table->addIndex(['unit_id'], 'kma_user');
 			$table->addForeignKeyConstraint(
 				'kma_position',
@@ -430,7 +430,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 		}
 
 		if (!$schema->hasTable('kma_user_position_unit')){
-			$table = $schema->createTable('kma_user');
+			$table = $schema->createTable('kma_user_position_unit');
 
 			$table->addColumn('kma_id', 'string', [
 				'notnull' => true,
