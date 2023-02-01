@@ -6,13 +6,6 @@ use OCP\IDBConnection;
 use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Controller;
-
-// use OCP\IRequest;
-// use OCP\IUserManager;
-// use OCP\IUserSession;
-// use OCP\AppFramework\Http\DataResponse;
-// use OCP\AppFramework\Controller;
-// use OCP\AppFramework\OCSController;
 use OCP\AppFramework\Http;
 
 class CanboController  extends Controller{
@@ -156,5 +149,4 @@ class CanboController  extends Controller{
         $query->execute(array($ma_cv, $ma_pb, $ho_ten, $sdt, $dia_chi, $cmnd_cccd, $email, $username));
         return new JSONResponse(array('status' => 'success'));
     }
-
 }

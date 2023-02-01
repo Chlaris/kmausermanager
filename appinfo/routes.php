@@ -13,7 +13,6 @@ return [
 		#Page
 		['name' => 'page#index', 'url' => '/', 'verb' => 'GET'],
 		['name' => 'page#add', 'url' => '/add', 'verb' => 'GET'],
-
 		['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
 
 		#Canbo
@@ -23,45 +22,6 @@ return [
 		['name' => 'canbo#createCanbo', 'url' => '/create_kma_user', 'verb' => 'POST'],
 		['name' => 'canbo#deleteCanbo', 'url' => '/delete_kma_user', 'verb' => 'DELETE'],
 		['name' => 'canbo#updateInfoKMA', 'url' => '/update_kma_user/{username}', 'verb' => 'PUT']
-
-
 		
     ],
-
-//    'ocs' => [
-//		['root' => '/kma', 'name' => 'Canbo#getCanbo', 'url' => '/kma_users', 'verb' => 'GET'],
-        // apis
-		// [
-		// 	'name' => 'canbo#getCanbo',
-		// 	'url' => '/api/v1/users/{path}',
-		// 	'verb' => 'GET',
-		// 	'requirements' => [
-		// 		'path' => '.*',
-		// 	]
-		// ],
-        // [
-		// 	'name' => 'user#users',
-		// 	'url' => '/api/v1/users/',
-		// 	'verb' => 'POST',
-		// 	'requirements' => [
-		// 		'path' => '.*',
-		// 	]
-		// ],
-        // [
-		// 	'name' => 'user#users',
-		// 	'url' => '/api/v1/users/',
-		// 	'verb' => 'PUT',
-		// 	'requirements' => [
-		// 		'path' => '.*',
-		// 	]
-		// ],
-        // [
-		// 	'name' => 'user#users',
-		// 	'url' => '/api/v1/users/',
-		// 	'verb' => 'DELETE',
-		// 	'requirements' => [
-		// 		'path' => '.*',
-		// 	]
-		// ],
-    //]
 ];

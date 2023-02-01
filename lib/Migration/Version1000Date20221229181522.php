@@ -9,6 +9,7 @@ use Doctrine\DBAL\Types;
 use OCP\DB\ISchemaWrapper;
 use OCP\Migration\IOutput;
 use OCP\Migration\SimpleMigrationStep;
+use phpDocumentor\Reflection\PseudoTypes\False_;
 
 /**
  * Auto-generated migration step: Please modify to your needs!
@@ -33,327 +34,461 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 		/** @var ISchemaWrapper $schema */
 		$schema = $schemaClosure();
 
-		if (!$schema->hasTable('kma_canbo')){
-			$table = $schema->createTable('kma_canbo');
-			$table->addColumn('username', 'string', [
+		// kma_user, kma_relations
+
+		if (!$schema->hasTable('kma_user')){
+			$table = $schema->createTable('kma_user');
+			$table->addColumn('kma_uid', 'string', [
+				'notnull' => true,
+				'length' => 64,
+				'default' => '',
+			]);
+
+			$table->addColumn('full_name', 'string', [
 				'notnull' => true,
 				'length' => 64
 			]);
-			$table->addColumn('ma_cv', 'string', [
-				'notnull' => false,
-				'length' => 64
-			]);
-			$table->addColumn('ma_pb', 'string', [
-				'notnull' => false,
-				'length' => 64
-			]);
-			$table->addColumn('ho_ten', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ngay_sinh', 'datetime', [
+
+			$table->addColumn('date_of_birth', 'datetime', [
 				'notnull' => false
 			]);
-			$table->addColumn('gioi_tinh', 'boolean', [
+
+			$table->addColumn('gender', 'boolean', [
 				'notnull' => false
 			]);
-			$table->addColumn('sdt', 'string', [
-				'notnull' => true,
+
+			$table->addColumn('phone', 'string', [
+				'notnull' => false,
 				'length' => 20
 			]);
-			$table->addColumn('dia_chi', 'string', [
-				'notnull' => true,
+
+			$table->addColumn('address', 'string', [
+				'notnull' => false,
 				'length' => 255
 			]);
-			$table->addColumn('cmnd_cccd', 'string', [
+
+			$table->addColumn('id_number', 'string', [
 				'notnull' => true,
 				'length' => 12
 			]);
+
 			$table->addColumn('email', 'string', [
-				'notnull' => true,
-				'length' => 255
-			]);
-			$table->setPrimaryKey(['username']);
-		}
-
-		if (!$schema->hasTable('kma_nguoithan')) {
-			$table = $schema->createTable('kma_nguoithan');
-			$table->addColumn('username', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('ma_nt', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ho_ten', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('ngay_sinh', 'datetime', [
-				'notnull' => false
-			]);
-			$table->addColumn('gioi_tinh', 'string', [
-				'notnull' => false,
-				'length' => 3
-			]);
-			$table->addColumn('sdt', 'string', [
-				'notnull' => false,
-				'length' => 20
-			]);
-			$table->addColumn('dia_chi', 'string', [
 				'notnull' => false,
 				'length' => 255
 			]);
-			$table->addColumn('nghe_nghiep', 'string', [
+
+			$table->addColumn('position_id', 'integer', [
 				'notnull' => true,
-				'length' => 255
+				'length' => 64,
+				'unsigned' => true
 			]);
-			$table->addColumn('hinh_thuc_qh', 'string', [
+
+			$table->addColumn('salary', 'integer', [
 				'notnull' => true,
-				'length' => 255
+				'length' => 10,
+				'default' => 10000000
 			]);
-			$table->setPrimaryKey(['ma_nt']);
+
+			$table->addColumn('coefficients_salary', 'integer', [
+				'notnull' => true,
+				'length' => 10,
+				'default' => 1
+			]);
+
+			$table->addColumn('tax', 'integer', [
+				'notnull' => true,
+				'length' => 10,
+				'default' => 10
+			]);
+
+			$table->addColumn('day_joined', 'datetime', [
+				'notnull' => false
+
+			]);
+
+			$table->addColumn('communist_party_joined', 'datetime', [
+				'notnull' => false,
+			]);
+
+			$table->addColumn('communist_party_confirmed', 'datetime', [
+				'notnull' => false,
+			]);
+
+			$table->addColumn('unit_id', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->setPrimaryKey(['kma_uid', 'id_number']);
+			// $table->addIndex(['id_number'], 'kma_user');
+			$table->addIndex(['position_id'], 'kma_user');
+			// $table->addIndex(['unit_id'], 'kma_user');
+			$table->addForeignKeyConstraint(
+				'kma_position',
+				['position_id'],
+				['position_id'],
+				['onDelete' => 'CASCADE']
+			);
+			$table->addForeignKeyConstraint(
+				'kma_unit',
+				['unit_id'],
+				['unit_id'],
+				['onDelete' => 'CASCADE']
+			);
+			
 		}
 
-		if (!$schema->hasTable('kma_hopdong')) {
-			$table = $schema->createTable('kma_hopdong');
-			$table->addColumn('ma_hd', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('username', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ten_hd', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ngay_bat_dau', 'datetime', [
-				'notnull' => false
-			]);
-			$table->addColumn('ngay_het_han', 'datetime', [
-				'notnull' => false
-			]);
-			$table->addColumn('mo_ta', 'string', [
-				'notnull' => false
-			]);
-			$table->addColumn('trang_thai', 'boolean', [
-				'notnull' => false
-			]);
-			$table->setPrimaryKey(['ma_hd']);
-		}
 
-		if (!$schema->hasTable('kma_nghiphep')) {
-			$table = $schema->createTable('kma_nghiphep');
-			$table->addColumn('username', 'string', [
+		if (!$schema->hasTable('kma_relations')) {
+			$table = $schema->createTable('kma_relations');
+			$table->addColumn('relations_id', 'integer', [
+				'notnull' => true,
+				'length' => 64,
+				'autoincrement' => true
+			]);
+
+			$table->addColumn('kma_uid', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('full_name', 'string', [
 				'notnull' => true,
 				'length' => 64,
 			]);
-			$table->addColumn('ma_np', 'string', [
+
+			$table->addColumn('date_of_birth', 'datetime', [
+				'notnull' => false
+			]);
+
+			$table->addColumn('phone', 'integer', [
+				'notnull' => false,
+				'length' => 10
+			]);
+
+			$table->addColumn('address', 'string', [
+				'notnull' => false,
+				'length' => 255
+			]);
+
+			$table->addColumn('relationship', 'string', [
 				'notnull' => true,
-				'length' => 64
+				'length' => 255
 			]);
-			$table->addColumn('ngay_bat_dau', 'datetime', [
-				'notnull' => false
+			$table->setPrimaryKey(['relations_id']);
+			// $table->addIndex(['kma_uid'], 'kma_relations_uid');
+			$table->addForeignKeyConstraint(
+				'kma_user',
+				['kma_uid'],
+				['kma_uid'],
+				['onDelete' => 'CASCADE']
+			);
+		}
+
+		// kma_education, kma_business_leave
+
+        if (!$schema->hasTable('kma_education')) {
+			$table = $schema->createTable('kma_education');
+			$table->addColumn('education_id', 'integer', [
+				'notnull' => true,
+				'length' => 64,
+				'autoincrement' => true
 			]);
-			$table->addColumn('ngay_ket_thuc', 'datetime', [
-				'notnull' => false
+
+			$table->addColumn('kma_uid', 'string', [
+				'unsigned' => true
 			]);
-			$table->addColumn('so_ngay_nghi', 'integer', [
-				'notnull' => false
-			]);
-			$table->addColumn('ly_do', 'string', [
+
+			$table->addColumn('graduate_time', 'datetime', [
 				'notnull' => true
 			]);
-			$table->addColumn('trang_thai', 'boolean', [
-				'notnull' => false
-			]);
-			$table->setPrimaryKey(['ma_np']);
-		}
 
-		if (!$schema->hasTable('kma_cong')) {
-			$table = $schema->createTable('kma_cong');
-			$table->addColumn('ma_cong', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('username', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ngay', 'datetime', [
-				'notnull' => false
-			]);
-			$table->addColumn('trang_thai', 'boolean', [
-				'notnull' => false
-			]);
-			$table->setPrimaryKey(['ma_cong']);
-		}
-
-		if (!$schema->hasTable('kma_daotao')) {
-			$table = $schema->createTable('kma_daotao');
-			$table->addColumn('ma_dt', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('ten', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('yeu_cau', 'string', [
+			$table->addColumn('admision_time', 'datetime', [
 				'notnull' => true
 			]);
-			$table->addColumn('chuyen_nganh', 'string', [
+
+			$table->addColumn('training_unit', 'string', [
 				'notnull' => true,
 				'length' => 64
 			]);
-			$table->addColumn('hinh_thuc_dt', 'string', [
+
+			$table->addColumn('specialization', 'string', [
 				'notnull' => true,
 				'length' => 64
 			]);
-			$table->addColumn('van_bang', 'string', [
+
+			$table->addColumn('diploma', 'string', [
 				'notnull' => true,
 				'length' => 64
 			]);
-			$table->setPrimaryKey(['ma_dt']);
+
+			$table->addColumn('graduated_with', 'string', [
+				'notnull' => true,
+				'length' => 64
+			]);
+
+			$table->setPrimaryKey(['education_id']);
+			// $table->addIndex(['kma_uid'], 'kma_education_uid');
+			$table->addForeignKeyConstraint(
+				'kma_user',
+				['kma_uid'],
+				['kma_uid'],
+				['onDelete' => 'CASCADE']
+			);
 		}
 
-		if (!$schema->hasTable('kma_qtdaotao')) {
-			$table = $schema->createTable('kma_qtdaotao');
-			$table->addColumn('ma_qt_dt', 'string', [
+	
+
+		if (!$schema->hasTable('kma_business')) {
+			$table = $schema->createTable('kma_business');
+			$table->addColumn('business_id', 'string', [
 				'notnull' => true,
 				'length' => 64,
+				'autoincrement' => true
 			]);
-			$table->addColumn('username', 'string', [
-				'notnull' => true,
-				'length' => 64,
+
+			$table->addColumn('kma_uid', 'string', [
+				'unsigned' => true
 			]);
-			$table->addColumn('ma_dt', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('ket_qua', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ngay_bat_dau', 'datetime', [
+
+			$table->addColumn('start_time', 'datetime', [
 				'notnull' => false
 			]);
-			$table->addColumn('ngay_ket_thuc', 'datetime', [
+
+			$table->addColumn('end_time', 'datetime', [
 				'notnull' => false
 			]);
-			$table->addColumn('dia_diem', 'string', [
+
+			$table->addColumn('work_address', 'string', [
 				'notnull' => true,
 				'length' => 255
 			]);
-			$table->setPrimaryKey(['ma_qt_dt']);
-		}
 
-		if (!$schema->hasTable('kma_qtcongtac')) {
-			$table = $schema->createTable('kma_qtcongtac');
-			$table->addColumn('username', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('ma_qt_ct', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ngay_bat_dau', 'datetime', [
-				'notnull' => false
-			]);
-			$table->addColumn('ngay_ket_thuc', 'datetime', [
-				'notnull' => false
-			]);
-			$table->addColumn('co_quan', 'string', [
+			$table->addColumn('unit', 'string', [
 				'notnull' => true,
 				'length' => 255
 			]);
-			$table->addColumn('don_vi', 'string', [
+
+			$table->addColumn('position', 'string', [
 				'notnull' => true,
 				'length' => 255
 			]);
-			$table->addColumn('trang_thai', 'boolean', [
-				'notnull' => false
-			]);
-			$table->setPrimaryKey(['ma_qt_ct']);
+
+			$table->setPrimaryKey(['business_id']);
+			// $table->addIndex(['kma_uid'], 'kma_business_uid');
+			$table->addForeignKeyConstraint(
+				'kma_user',
+				['kma_uid'],
+				['kma_uid'],
+				['onDelete' => 'CASCADE']
+			);
 		}
 
-		if (!$schema->hasTable('kma_luong')) {
-			$table = $schema->createTable('kma_luong');
-			$table->addColumn('username', 'string', [
-				'notnull' => true,
-				'length' => 64,
-			]);
-			$table->addColumn('ma_luong', 'string', [
+		// kma_position, kma_combat_unit, kma_bonus, kma_cell
+        
+        if (!$schema->hasTable('kma_position')) {
+			$table = $schema->createTable('kma_position');
+			$table->addColumn('position_id', 'integer', [
+				'autoincrement' => true,
 				'notnull' => true,
 				'length' => 64
 			]);
-			$table->addColumn('ngay_cong', 'smallint', [
-				'notnull' => false
-			]);
-			$table->addColumn('ngay_np', 'smallint', [
-				'notnull' => false
-			]);
-			$table->addColumn('luong_co_so', 'float', [
-				'notnull' => false
-			]);
-			$table->addColumn('he_so_luong', 'float', [
-				'notnull' => false
-			]);
-			$table->addColumn('phu_cap', 'float', [
-				'notnull' => false
-			]);
-			$table->setPrimaryKey(['ma_luong']);
-		}
-
-		if (!$schema->hasTable('kma_chucvu')) {
-			$table = $schema->createTable('kma_chucvu');
-			$table->addColumn('ma_cv', 'string', [
-				'notnull' => true,
-				'length' => 64
-			]);
-			$table->addColumn('ten_cv', 'string', [
+			$table->addColumn('position_name', 'string', [
 				'notnull' => false,
 				'length' => 255
 			]);
-			$table->addColumn('them', 'boolean', [
-				'notnull' => false
+			
+			$table->addColumn('allowance', 'integer', [
+				'notnull' => false,
 			]);
-			$table->addColumn('xoa', 'boolean', [
-				'notnull' => false
+
+			$table->addColumn('remark', 'string', [
+				'notnull' => false,
+				'length' => 255
 			]);
-			$table->addColumn('sua', 'boolean', [
-				'notnull' => false
-			]);
-			$table->setPrimaryKey(['ma_cv']);
+
+			$table->setPrimaryKey(['position_id']);
 		}
 
-		if (!$schema->hasTable('kma_phongban')) {
-			$table = $schema->createTable('kma_phongban');
-			$table->addColumn('groupid', 'string', [
-				'notnull' => false,
-				'length' => 64
-			]);
-			$table->addColumn('ma_pb', 'string', [
+
+		if (!$schema->hasTable('kma_unit')) {
+			$table = $schema->createTable('kma_unit');
+			$table->addColumn('unit_id', 'string', [
 				'notnull' => true,
-				'length' => 64
+				'length' => 64,
+				'autoincrement' => true
 			]);
-			$table->addColumn('ten_pb', 'string', [
+
+			$table->addColumn('unit_name', 'string', [
+				'notnull' => true,
+				'length' => 255
+			]);
+			
+			$table->addColumn('description', 'string', [
 				'notnull' => false,
 				'length' => 255
 			]);
-			$table->addColumn('sdt', 'string', [
-				'notnull' => false,
-				'length' => 20
+
+			$table->addColumn('chief_unit', 'string', [
+				'unsigned' => true
 			]);
-			$table->addColumn('dia_chi', 'string', [
+
+			$table->addColumn('deputy_unit', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->setPrimaryKey(['unit_id']);		
+		}
+
+		if (!$schema->hasTable('kma_bonus')) {
+			$table = $schema->createTable('kma_bonus');
+			$table->addColumn('bonus_id', 'integer', [
+				'notnull' => true,
+				'autoincrement' => true
+			]);
+
+			$table->addColumn('kma_uid', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('time', 'datetime', [
+				'notnull' => true,
+			]);
+			
+			$table->addColumn('reason', 'string', [
 				'notnull' => false,
 				'length' => 255
 			]);
-			$table->setPrimaryKey(['ma_pb']);
+
+			$table->addColumn('number_decision', 'integer', [
+				'notnull' => false,
+			]);
+
+			$table->addColumn('department_decision', 'integer', [
+				'notnull' => false,
+			]);
+			
+			$table->setPrimaryKey(['bonus_id']);
+			// $table->addIndex(['kma_uid'], 'kma_bonus_uid');
+			$table->addForeignKeyConstraint(
+				'kma_user',
+				['kma_uid'],
+				['kma_uid'],
+				['onDelete' => 'CASCADE']
+			);
+		}
+
+		if (!$schema->hasTable('kma_cell')) {
+			$table = $schema->createTable('kma_cell');
+			$table->addColumn('cell_id', 'string', [
+				'notnull' => true,
+				'length' => 64,
+				'autoincrement' => true
+			]);
+
+			$table->addColumn('cell_name', 'string', [
+				'notnull' => true,
+				'length' => 255
+			]);
+			
+			$table->addColumn('description', 'string', [
+				'notnull' => false,
+				'length' => 255
+			]);
+			$table->addColumn('unit_id', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('secretary_id', 'string', [
+				'notnull' => true,
+				'length' => 64,
+			]);
+
+			$table->addColumn('vice_secretary_id', 'string', [
+				'notnull' => true,
+				'length' => 64,
+			]);
+
+			$table->addColumn('executive_committee_1st', 'string', [
+				'notnull' => true,
+				'length' => 64,
+			]);
+
+			$table->addColumn('executive_committee_2nd', 'string', [
+				'notnull' => true,
+				'length' => 64,
+			]);
+
+			$table->setPrimaryKey(['cell_id']);
+			// $table->addIndex(['unit_id'], 'cell_unit_id');
+			// $table->addIndex(['secretary_id'], 'cell_secretary_id');
+			// $table->addIndex(['vice_secretary_id'], 'cell_vice_secretary_id');
+			$table->addForeignKeyConstraint(
+				'kma_unit',
+				['unit_id'],
+				['unit_id'],
+				['onDelete' => 'CASCADE']
+			);
+		}
+
+		if (!$schema->hasTable('kma_user_position_unit')){
+			$table = $schema->createTable('kma_user');
+
+			$table->addColumn('kma_id', 'string', [
+				'notnull' => true,
+				'length' => 64,
+				'autoincrement' => true
+			]);
+
+			$table->addColumn('kma_uid', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('position_id', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('unit_id', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('start_time', 'datetime', [
+				'notnull' => false
+			]);
+
+			$table->addColumn('end_time', 'datetime', [
+				'notnull' => false
+			]);
+
+			$table->addColumn('allowance', 'integer', [
+				'notnull' => false,
+			]);
+
+			$table->addColumn('file', 'string', [
+				'notnull' => false,
+			]);
+
+			$table->setPrimaryKey(['kma_id']);
+			// $table->addIndex(['kma_uid'], 'kma_user_position_unit');
+			// $table->addIndex(['position_id'], 'kma_user_position_unit');
+			// $table->addIndex(['unit_id'], 'kma_user_position_unit');
+			$table->addForeignKeyConstraint(
+				'kma_user',
+				['kma_uid'],
+				['kma_uid'],
+				['onDelete' => 'CASCADE']
+			);
+			$table->addForeignKeyConstraint(
+				'kma_position',
+				['position_id'],
+				['position_id'],
+				['onDelete' => 'CASCADE']
+			);
+			$table->addForeignKeyConstraint(
+				'kma_unit',
+				['unit_id'],
+				['unit_id'],
+				['onDelete' => 'CASCADE']
+			);
+
 		}
 
 		return $schema;
