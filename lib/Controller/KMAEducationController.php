@@ -8,7 +8,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 
-class KMAREducationController extends Controller{
+class KMAEducationController extends Controller{
     private $db;
 
     public function __construct($AppName, IRequest $request, IDBConnection $db) {
@@ -27,17 +27,17 @@ class KMAREducationController extends Controller{
             ->from('kma_education');
 
         $result = $query->execute();
-        $education = $result->fetchAll();
-        return ['education' => $education];
+        $educations = $result->fetchAll();
+        return ['educations' => $educations];
     }
 
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
      *
-     * @param string $userId
+     * @param string $education_id
      */
-    public function getKMARelation($relations_id) {
+    public function getKMAEducation($education_id) {
         $query = $this->db->getQueryBuilder();
         $query->select('*')
             ->from('kma_education')
@@ -60,34 +60,6 @@ class KMAREducationController extends Controller{
             // Add other desired user information here
         ]);
     }	
-
-    /**
-     * @NoAdminRequired
-     * @NoCSRFRequired
-     *
-     * @param string $userId
-     */
-    public function getKMARelationById($kma_uid) {
-        $query = $this->db->getQueryBuilder();
-        $query->select('*')
-            ->from('kma_relations')
-            ->where($query->expr()->eq('$kma_uid', $query->createNamedParameter($kma_uid)));
-
-        $result = $query->execute();
-        $data = $result->fetch();
-        if ($data === false) {
-            return new DataResponse([], Http::STATUS_NOT_FOUND);
-        }
-        return new DataResponse([
-            'Ma nguoi than' => $data['relations_id'],
-            'Ma can bo' => $data['kma_uid'],
-            'Ho va Ten' => $data['  = null'],
-            'Ngay sinh' => $data['date_of_birth'],
-            'So dien thoai' => $data['phone'],
-            'Dia chi' => $data['address'],
-            // Add other desired user information here
-        ]);
-    }
     
     /**
      * @NoAdminRequired
@@ -124,12 +96,12 @@ class KMAREducationController extends Controller{
      * @NoAdminRequired
      * @NoCSRFRequired
      *
-     * @param string $relations_id
+     * @param string $education_id
      */
-    public function deleteKMAUser($relations_id) {
+    public function deleteKMAEducation($education_id) {
         $query = $this->db->getQueryBuilder();
-        $query->delete('kma_relations')
-            ->where($query->expr()->eq('relations_id', $query->createNamedParameter($relations_id)))
+        $query->delete('kma_education')
+            ->where($query->expr()->eq('education_id', $query->createNamedParameter($education_id)))
             ->execute();
         return new DataResponse(['status' => 'success']);
     }
@@ -138,24 +110,26 @@ class KMAREducationController extends Controller{
      * @NoAdminRequired
      * @NoCSRFRequired
      *
-     * @param string $relations_id
+     * @param string $education_id
      * @param string $kma_uid
-     * @param string $full_name
-     * @param string $date_of_birth
-     * @param string $phone
-     * @param string $address
-     * @param string $relationship
+     * @param string $graduate_time
+     * @param string $admision_time
+     * @param string $training_unit
+     * @param string $specialization
+     * @param string $diploma
+     * @param string $graduated_with
      * @return JSONResponse
      */
-    public function updateInfoKMARelation($relations_id, $kma_uid = null, $full_name  = null, $date_of_birth = null, $phone = null, $address = null, $relationship = null) {
-      $query = $this->db->prepare('UPDATE `oc_kma_relations` SET `kma_uid` = COALESCE(?, `kma_uid`), 
-                                                            `full_name` = COALESCE(?, `full_name`), 
-                                                            `date_of_birth` = COALESCE(?, `date_of_birth`), 
-                                                            `phone` = COALESCE(?, `phone`),
-                                                            `address` = COALESCE(?, `address`),
-                                                            `relationship` = COALESCE(?, `relationship`)
-                                                                WHERE `relations_id` = ?');
-        $query->execute(array($relations_id, $full_name, $date_of_birth, $phone, $address, $relationship, $kma_uid));
+    public function updateInfoKMAEducation($education_id, $kma_uid = null, $graduate_time  = null, $admision_time = null, $training_unit = null, $specialization = null, $diploma = null, $graduated_with = null) {
+      $query = $this->db->prepare('UPDATE `oc_kma_education` SET `kma_uid` = COALESCE(?, `kma_uid`), 
+                                                            `graduate_time` = COALESCE(?, `graduate_time`), 
+                                                            `admision_time` = COALESCE(?, `admision_time`), 
+                                                            `training_unit` = COALESCE(?, `training_unit`),
+                                                            `specialization` = COALESCE(?, `specialization`),
+                                                            `diploma` = COALESCE(?, `diploma`), 
+                                                            `graduated_with` = COALESCE(?, `graduated_with`), 
+                                                                WHERE `education_id` = ?');
+        $query->execute(array($relations_id, $graduate_time, $admision_time, $training_unit, $specialization, $diploma, $graduated_with, $kma_uid));
         return new JSONResponse(array('status' => 'success'));
     }
 }

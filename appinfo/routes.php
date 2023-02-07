@@ -20,7 +20,7 @@ return [
 		['name' => 'KMAUser#getAllKMAUser', 'url' => '/all_kma_user', 'verb' => 'GET'],
 		['name' => 'KMAUser#getKMAUser', 'url' => '/kma_user/{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMAUser#createKMAUser', 'url' => '/create_kma_user', 'verb' => 'POST'],
-		['name' => 'KMAUser#deleteKMAUser', 'url' => '/delete_kma_user', 'verb' => 'DELETE'],
+		['name' => 'KMAUser#deleteKMAUser', 'url' => '/delete_kma_user/{kma_uid}', 'verb' => 'DELETE'],
 		['name' => 'KMAUser#updateInfoKMAUser', 'url' => '/update_kma_user/{kma_uid}', 'verb' => 'PUT'],
 		
 
@@ -29,7 +29,24 @@ return [
 		['name' => 'KMARelations#getKMARelation', 'url' => '/kma_relation/{relations_id}', 'verb' => 'GET'],
 		// ['name' => 'KMARelations#getKMARelationById', 'url' => '/kma_relation{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMARelations#createKMARelation', 'url' => '/create_kma_relation', 'verb' => 'POST'],
-		['name' => 'KMARelations#deleteKMARelation', 'url' => '/delete_kma_relation', 'verb' => 'DELETE'],
+		['name' => 'KMARelations#deleteKMARelation', 'url' => '/delete_kma_relation/{relations_id}', 'verb' => 'DELETE'],
 		['name' => 'KMARelations#updateInfoKMARelation', 'url' => '/update_kma_relation/{relations_id}', 'verb' => 'PUT'],
+
+		#Daotao
+		['name' => 'KMAEducation#createKMAEducation', 'url' => '/create_kma_education', 'verb' => 'POST'],
+		['name' => 'KMAEducation#getAllKMAEducation', 'url' => '/all_kma_educations', 'verb' => 'GET'],
+		['name' => 'KMAEducation#getKMAEducation', 'url' => '/kma_education/{education_id}', 'verb' => 'GET'],
+		['name' => 'KMAEducation#updateInfoKMAEducation', 'url' => '/update_kma_education/{education_id}', 'verb' => 'PUT'],
+		['name' => 'KMAEducation#deleteKMAEducation', 'url' => '/delete_kma_education/{education_id}', 'verb' => 'DELETE'],
+
+		#Congtac
+		['name' => 'KMABusiness#createKMABusiness', 'url' => '/create_kma_business', 'verb' => 'POST'],
+		['name' => 'KMABusiness#getAllKMABusiness', 'url' => '/all_kma_businesses', 'verb' => 'GET'],
+		['name' => 'KMABusiness#getKMABusiness', 'url' => '/kma_business/{business}', 'verb' => 'GET'],
+		
+
+		#Chucvu
+		['name' => 'KMAPosition#createKMAPosition', 'url' => '/create_kma_position', 'verb' => 'POST'],
+		['name' => 'KMAPosition#getAllKMAPosition', 'url' => '/all_kma_positions', 'verb' => 'GET'],
     ],
 ];
