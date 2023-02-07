@@ -49,7 +49,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'length' => 64
 			]);
 
-			$table->addColumn('date_of_birth', 'datetime', [
+			$table->addColumn('date_of_birth', 'date', [
 				'notnull' => false,
 			]);
 
@@ -104,16 +104,16 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'default' => 10
 			]);
 
-			$table->addColumn('day_joined', 'datetime', [
+			$table->addColumn('day_joined', 'date', [
 				'notnull' => false
 
 			]);
 
-			$table->addColumn('communist_party_joined', 'datetime', [
+			$table->addColumn('communist_party_joined', 'date', [
 				'notnull' => false,
 			]);
 
-			$table->addColumn('communist_party_confirmed', 'datetime', [
+			$table->addColumn('communist_party_confirmed', 'date', [
 				'notnull' => false,
 			]);
 
@@ -158,7 +158,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'length' => 64,
 			]);
 
-			$table->addColumn('date_of_birth', 'datetime', [
+			$table->addColumn('date_of_birth', 'date', [
 				'notnull' => false
 			]);
 
@@ -200,11 +200,11 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'unsigned' => true
 			]);
 
-			$table->addColumn('graduate_time', 'datetime', [
+			$table->addColumn('graduate_time', 'date', [
 				'notnull' => true
 			]);
 
-			$table->addColumn('admision_time', 'datetime', [
+			$table->addColumn('admision_time', 'date', [
 				'notnull' => true
 			]);
 
@@ -252,17 +252,12 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'unsigned' => true
 			]);
 
-			$table->addColumn('start_time', 'datetime', [
+			$table->addColumn('start_time', 'date', [
 				'notnull' => false
 			]);
 
-			$table->addColumn('end_time', 'datetime', [
+			$table->addColumn('end_time', 'date', [
 				'notnull' => false
-			]);
-
-			$table->addColumn('work_address', 'string', [
-				'notnull' => true,
-				'length' => 255
 			]);
 
 			$table->addColumn('unit', 'string', [
@@ -338,6 +333,10 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'unsigned' => true
 			]);
 
+			$table->addColumn('parent_unit', 'string', [
+				'unsigned' => true
+			]);
+
 			$table->setPrimaryKey(['unit_id']);		
 		}
 
@@ -348,11 +347,12 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'autoincrement' => true
 			]);
 
-			$table->addColumn('kma_uid', 'string', [
-				'unsigned' => true
+			$table->addColumn('form', 'string', [
+				'notnull' => true,
+				'length' => 64,
 			]);
 
-			$table->addColumn('time', 'datetime', [
+			$table->addColumn('time', 'date', [
 				'notnull' => true,
 			]);
 			
@@ -370,13 +370,6 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 			
 			$table->setPrimaryKey(['bonus_id']);
-			// $table->addIndex(['kma_uid'], 'kma_bonus_uid');
-			$table->addForeignKeyConstraint(
-				'kma_user',
-				['kma_uid'],
-				['kma_uid'],
-				['onDelete' => 'CASCADE']
-			);
 		}
 
 		if (!$schema->hasTable('kma_cell')) {
@@ -453,11 +446,11 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'unsigned' => true
 			]);
 
-			$table->addColumn('start_time', 'datetime', [
+			$table->addColumn('start_time', 'date', [
 				'notnull' => false
 			]);
 
-			$table->addColumn('end_time', 'datetime', [
+			$table->addColumn('end_time', 'date', [
 				'notnull' => false
 			]);
 
