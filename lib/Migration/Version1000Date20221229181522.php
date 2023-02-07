@@ -50,7 +50,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 
 			$table->addColumn('date_of_birth', 'datetime', [
-				'notnull' => false
+				'notnull' => false,
 			]);
 
 			$table->addColumn('gender', 'boolean', [
@@ -59,22 +59,25 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 
 			$table->addColumn('phone', 'string', [
 				'notnull' => false,
-				'length' => 20
+				'length' => 20,
+				'default' => '',
 			]);
 
 			$table->addColumn('address', 'string', [
 				'notnull' => false,
-				'length' => 255
+				'length' => 255,
+				'default' => '',
 			]);
 
 			$table->addColumn('id_number', 'string', [
 				'notnull' => true,
-				'length' => 12
+				'length' => 12,
 			]);
 
 			$table->addColumn('email', 'string', [
 				'notnull' => false,
-				'length' => 255
+				'length' => 255,
+				'default' => '',
 			]);
 
 			$table->addColumn('position_id', 'integer', [
@@ -118,7 +121,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'unsigned' => true
 			]);
 
-			$table->setPrimaryKey(['kma_uid', 'id_number']);
+			$table->setPrimaryKey(['kma_uid']);
 			// $table->addIndex(['id_number'], 'kma_user');
 			// $table->addIndex(['position_id'], 'kma_user');
 			// $table->addIndex(['unit_id'], 'kma_user');
