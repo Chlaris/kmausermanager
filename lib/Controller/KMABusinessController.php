@@ -32,7 +32,6 @@ class KMABusinessController  extends Controller{
     }
 
 
-
     /**
      * @NoAdminRequired
      * @NoCSRFRequired
@@ -43,7 +42,7 @@ class KMABusinessController  extends Controller{
         $query = $this->db->getQueryBuilder();
         $query->select('*')
             ->from('kma_business')
-            ->where($query->expr()->eq('business', $query->createNamedParameter($business_id)));
+            ->where($query->expr()->eq('business_id', $query->createNamedParameter($business_id)));
 
         $result = $query->execute();
         $data = $result->fetch();

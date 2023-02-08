@@ -57,6 +57,8 @@ class KMABonusController extends Controller{
             'Ly do' => $data['reason'],
             'So quyet dinh' => $data['number_decision'],
             'Co quan quyet dinh' => $data['department_decision'],
+            'Ma can bo' => $data['kma_uid'],
+            'Loai' => $data['type'],
             // Add other desired user information here
         ]);
     }	
@@ -72,8 +74,10 @@ class KMABonusController extends Controller{
 	 * @param string $reason
      * @param string $number_decision
      * @param string $department_decision
+     * @param string $kma_uid
+     * @param string $type
      */
-    public function createKMABonus($bonus_id, $form, $time, $reason, $number_decision, $department_decision) {
+    public function createKMABonus($bonus_id, $form, $time, $reason, $number_decision, $department_decision, $kma_uid, $type) {
         $query = $this->db->getQueryBuilder();
         $query->insert('kma_bonus')
             ->values([
@@ -83,6 +87,8 @@ class KMABonusController extends Controller{
                 'reason' => $query->createNamedParameter($remark),
                 'number_decision' => $query->createNamedParameter($number_decision),
                 'department_decision' => $query->createNamedParameter($department_decision),
+                'kma_uid' => $query->createNamedParameter($kma_uid),
+                'type' => $query->createNamedParameter($type),
                 // Add other desired columns here
             ])
             ->execute();
@@ -116,16 +122,20 @@ class KMABonusController extends Controller{
 	 * @param string $reason
      * @param string $number_decision
      * @param string $department_decision
+     * @param string $kma_uid
+     * @param string $type
      * @return JSONResponse
      */
-    public function updateInfoKMABonus($bonus_id, $form = null, $time  = null, $reason = null, $number_decision, $department_decision) {
+    public function updateInfoKMABonus($bonus_id, $form = null, $time  = null, $reason = null, $number_decision, $department_decision, $kma_uid, $type) {
         $query = $this->db->prepare('UPDATE `oc_kma_bonus` SET `form` = COALESCE(?, `form`), 
                                                             `time` = COALESCE(?, `time`), 
                                                             `reason` = COALESCE(?, `reason`), 
                                                             `number_decision` = COALESCE(?, `number_decision`), 
                                                             `department_decision` = COALESCE(?, `department_decision`), 
+                                                            `kma_uid` = COALESCE(?, `kma_uid`), 
+                                                            `type` = COALESCE(?, `type`), 
                                                                 WHERE `bonus_id` = ?');
-        $query->execute(array($bonus_id, $form, $time, $reason, $number_decision, $department_decision));
+        $query->execute(array($bonus_id, $form, $time, $reason, $number_decision, $department_decision, $kma_uid, $type));
         return new JSONResponse(array('status' => 'success'));
     }
 }

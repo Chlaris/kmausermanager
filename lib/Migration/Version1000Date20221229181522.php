@@ -347,6 +347,14 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'autoincrement' => true
 			]);
 
+			$table->addColumn('kma_uid', 'string', [
+				'unsigned' => true
+			]);
+
+			$table->addColumn('type', 'boolean', [
+				'notnull' => false
+			]);
+
 			$table->addColumn('form', 'string', [
 				'notnull' => true,
 				'length' => 64,
@@ -370,6 +378,13 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 			
 			$table->setPrimaryKey(['bonus_id']);
+
+			$table->addForeignKeyConstraint(
+				'kma_user',
+				['kma_uid'],
+				['kma_uid'],
+				['onDelete' => 'CASCADE']
+			);
 		}
 
 		if (!$schema->hasTable('kma_cell')) {
