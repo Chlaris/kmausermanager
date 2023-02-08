@@ -280,7 +280,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			);
 		}
 
-		// kma_position, kma_combat_unit, kma_bonus, kma_cell
+		// kma_position, kma_unit, kma_bonus, kma_cell
         
         if (!$schema->hasTable('kma_position')) {
 			$table = $schema->createTable('kma_position');

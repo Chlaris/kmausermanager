@@ -56,6 +56,7 @@ class KMAUnitController  extends Controller{
             'Mo ta' => $data['description'],
             'Ma truong don vi' => $data['chief_unit'],
             'Ma pho don vi' => $data['deputy_unit'],
+            'Ma don vi cha' => $data['parent_unit'],
             // Add other desired user information here
         ]);
     }	
@@ -70,16 +71,18 @@ class KMAUnitController  extends Controller{
      * @param string $description
 	 * @param string $chief_unit
      * @param string $deputy_unit
+     * @param string $parent_unit
      */
-    public function createKMAUnit($unit_id, $unit_name, $description, $chief_unit, $deputy_unit) {
+    public function createKMAUnit($unit_id, $unit_name, $description, $chief_unit, $deputy_unit, $parent_unit) {
         $query = $this->db->getQueryBuilder();
-        $query->insert('kma_position')
+        $query->insert('kma_unit')
             ->values([
                 'unit_id' => $query->createNamedParameter($unit_id),
-                'unit_name' => $query->createNamedParameter($position_name),
+                'unit_name' => $query->createNamedParameter($unit_name),
                 'description' => $query->createNamedParameter($description),
                 'chief_unit' => $query->createNamedParameter($chief_unit),
                 'deputy_unit' => $query->createNamedParameter($deputy_unit),
+                'parent_unit' => $query->createNamedParameter($parent_unit),
                 // Add other desired columns here
             ])
             ->execute();
@@ -112,15 +115,17 @@ class KMAUnitController  extends Controller{
      * @param string $description
 	 * @param string $chief_unit
      * @param string $deputy_unit
+     * @param string $parent_id
      * @return JSONResponse
      */
-    public function updateInfoKMAPosition($unit_id, $unit_name = null, $description  = null, $chief_unit = null, $deputy_unit = null) {
-        $query = $this->db->prepare('UPDATE `oc_kma_position` SET `unit_name` = COALESCE(?, `unit_name`), 
+    public function updateInfoKMAUnit($unit_id, $unit_name = null, $description  = null, $chief_unit = null, $deputy_unit = null, $parent_id = null) {
+        $query = $this->db->prepare('UPDATE `oc_kma_unit` SET `unit_name` = COALESCE(?, `unit_name`), 
                                                             `description` = COALESCE(?, `description`), 
                                                             `chief_unit` = COALESCE(?, `chief_unit`), 
                                                             `deputy_unit` = COALESCE(?, `deputy_unit`), 
+                                                            `parent_id` = COALESCE(?, `parent_id`),
                                                                 WHERE `unit_id` = ?');
-        $query->execute(array($unit_id, $unit_name, $description, $chief_unit, $deputy_unit));
+        $query->execute(array($unit_id, $unit_name, $description, $chief_unit, $deputy_unit, $parent_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

@@ -55,7 +55,6 @@ class KMABusinessController  extends Controller{
             'Ma can bo' => $data['kma_uid'],
             'Ngay bat dau' => $data['start_time'],
             'Ngay ket thuc' => $data['end_time'],
-            'Dia diem' => $data['work_address'],
             'Don vi' => $data['unit'],
             'Chuc vu' => $data['position'],
             // Add other desired user information here
@@ -71,11 +70,10 @@ class KMABusinessController  extends Controller{
      * @param string $kma_uid
      * @param string $start_time
      * @param string $end_time
-	 * @param string $work_address
      * @param string $unit
      * @param string $position
      */
-    public function createKMABusiness($business_id, $kma_uid, $start_time, $end_time, $work_address, $unit, $position) {
+    public function createKMABusiness($business_id, $kma_uid, $start_time, $end_time, $unit, $position) {
         $query = $this->db->getQueryBuilder();
         $query->insert('kma_business')
             ->values([
@@ -83,7 +81,6 @@ class KMABusinessController  extends Controller{
                 'kma_uid' => $query->createNamedParameter($kma_uid),
                 'start_time' => $query->createNamedParameter($start_time),
                 'end_time' => $query->createNamedParameter($end_time),
-                'work_address' => $query->createNamedParameter($work_address),
                 'unit' => $query->createNamedParameter($unit),
                 'position' => $query->createNamedParameter($position),
                 // Add other desired columns here
@@ -117,20 +114,18 @@ class KMABusinessController  extends Controller{
      * @param string $kma_uid
      * @param string $start_time
      * @param string $end_time
-	 * @param string $work_address
      * @param string $unit
      * @param string $position
      * @return JSONResponse
      */
-    public function updateInfoKMABusiness($business_id, $kma_uid = null, $start_time = null, $end_time  = null, $work_address = null, $unit = null, $position = null) {
+    public function updateInfoKMABusiness($business_id, $kma_uid = null, $start_time = null, $end_time  = null, $unit = null, $position = null) {
         $query = $this->db->prepare('UPDATE `oc_kma_business` SET `start_time` = COALESCE(?, `start_time`), 
-                                                            `end_time` = COALESCE(?, `end_time`), 
-                                                            `work_address` = COALESCE(?, `work_address`), 
+                                                            `end_time` = COALESCE(?, `end_time`),
                                                             `unit` = COALESCE(?, `unit`),
                                                             `position` = COALESCE(?, `position`),
                                                             `kma_uid` = COALESCE(?, `kma_uid`),
                                                                 WHERE `business_id` = ?');
-        $query->execute(array($business_id, $kma_uid, $start_time, $end_time, $work_address, $unit, $position));
+        $query->execute(array($business_id, $kma_uid, $start_time, $end_time, $unit, $position));
         return new JSONResponse(array('status' => 'success'));
     }
 }

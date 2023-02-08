@@ -8,7 +8,7 @@ use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 
-class KMABonusController  extends Controller{
+class KMABonusController extends Controller{
     private $db;
 
     public function __construct($AppName, IRequest $request, IDBConnection $db) {
@@ -52,7 +52,7 @@ class KMABonusController  extends Controller{
         }
         return new DataResponse([
             'Ma khen thuong/ky luat' => $data['bonus_id'],
-            'Ma cab bo' => $data['kma_uid'],
+            'Hinh thuc' => $data['form'],
             'Thoi gian' => $data['time'],
             'Ly do' => $data['reason'],
             'So quyet dinh' => $data['number_decision'],
@@ -67,18 +67,18 @@ class KMABonusController  extends Controller{
      * @NoCSRFRequired
      *
      * @param string $bonus_id
-     * @param string $kma_uid
+     * @param string $form
      * @param string $time
 	 * @param string $reason
      * @param string $number_decision
      * @param string $department_decision
      */
-    public function createKMABonus($bonus_id, $kma_uid, $time, $reason, $number_decision, $department_decision) {
+    public function createKMABonus($bonus_id, $form, $time, $reason, $number_decision, $department_decision) {
         $query = $this->db->getQueryBuilder();
-        $query->insert('kma_position')
+        $query->insert('kma_bonus')
             ->values([
                 'bonus_id' => $query->createNamedParameter($bonus_id),
-                'kma_uid' => $query->createNamedParameter($kma_uid),
+                'form' => $query->createNamedParameter($form),
                 'time' => $query->createNamedParameter($time),
                 'reason' => $query->createNamedParameter($remark),
                 'number_decision' => $query->createNamedParameter($number_decision),
@@ -111,21 +111,21 @@ class KMABonusController  extends Controller{
      * @NoCSRFRequired
      *
      * @param string $bonus_id
-     * @param string $kma_uid
+     * @param string $form
      * @param string $time
 	 * @param string $reason
      * @param string $number_decision
      * @param string $department_decision
      * @return JSONResponse
      */
-    public function updateInfoKMABonus($bonus_id, $kma_uid = null, $time  = null, $reason = null, $number_decision, $department_decision) {
-        $query = $this->db->prepare('UPDATE `oc_kma_position` SET `kma_uid` = COALESCE(?, `kma_uid`), 
+    public function updateInfoKMABonus($bonus_id, $form = null, $time  = null, $reason = null, $number_decision, $department_decision) {
+        $query = $this->db->prepare('UPDATE `oc_kma_bonus` SET `form` = COALESCE(?, `form`), 
                                                             `time` = COALESCE(?, `time`), 
                                                             `reason` = COALESCE(?, `reason`), 
                                                             `number_decision` = COALESCE(?, `number_decision`), 
                                                             `department_decision` = COALESCE(?, `department_decision`), 
                                                                 WHERE `bonus_id` = ?');
-        $query->execute(array($bonus_id, $kma_uid, $time, $reason, $number_decision, $department_decision));
+        $query->execute(array($bonus_id, $form, $time, $reason, $number_decision, $department_decision));
         return new JSONResponse(array('status' => 'success'));
     }
 }

@@ -21,7 +21,7 @@ class KMAPositionController  extends Controller{
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function getAllKMAPosition() {
+    public function getAllKMAPositions() {
         $query = $this->db->getQueryBuilder();
         $query->select('*')
             ->from('kma_position');
