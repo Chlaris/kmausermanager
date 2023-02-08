@@ -242,7 +242,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 
 		if (!$schema->hasTable('kma_business')) {
 			$table = $schema->createTable('kma_business');
-			$table->addColumn('business_id', 'string', [
+			$table->addColumn('business_id', 'integer', [
 				'notnull' => true,
 				'length' => 64,
 				'autoincrement' => true
@@ -309,7 +309,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 
 		if (!$schema->hasTable('kma_unit')) {
 			$table = $schema->createTable('kma_unit');
-			$table->addColumn('unit_id', 'string', [
+			$table->addColumn('unit_id', 'integer', [
 				'notnull' => true,
 				'length' => 64,
 				'autoincrement' => true
