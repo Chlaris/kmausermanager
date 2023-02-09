@@ -62,6 +62,36 @@ class KMABonusController extends Controller{
             // Add other desired user information here
         ]);
     }	
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     *
+     * @param string $kma_uid
+     */
+    public function getKMABonusbyUID($kma_uid) {
+        $query = $this->db->getQueryBuilder();
+        $query->select('*')
+            ->from('kma_bonus')
+            ->where($query->expr()->eq('kma_uid', $query->createNamedParameter($kma_uid)));
+
+        $result = $query->execute();
+        $data = $result->fetch();
+        if ($data === false) {
+            return new DataResponse([], Http::STATUS_NOT_FOUND);
+        }
+        return new DataResponse([
+            'Ma khen thuong/ky luat' => $data['bonus_id'],
+            'Hinh thuc' => $data['form'],
+            'Thoi gian' => $data['time'],
+            'Ly do' => $data['reason'],
+            'So quyet dinh' => $data['number_decision'],
+            'Co quan quyet dinh' => $data['department_decision'],
+            'Ma can bo' => $data['kma_uid'],
+            'Loai' => $data['type'],
+            // Add other desired user information here
+        ]);
+    }	
 	
 
     /**

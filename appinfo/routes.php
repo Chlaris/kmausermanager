@@ -68,6 +68,7 @@ return [
 		['name' => 'KMABonus#createKMABonus', 'url' => '/create_kma_bonus', 'verb' => 'POST'],
 		['name' => 'KMABonus#getAllKMABonuses', 'url' => '/all_kma_bonuses', 'verb' => 'GET'],
 		['name' => 'KMABonus#getKMABonus', 'url' => '/kma_bonus/{bonus_id}', 'verb' => 'GET'],
+		['name' => 'KMABonus#getKMABonusbyUID', 'url' => '/kma_bonus_by_uid/{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMABonus#deleteKMABonus', 'url' => '/delete_kma_bonus/{bonus_id}', 'verb' => 'DELETE'],
 		['name' => 'KMABonus#updateInfoKMABonus', 'url' => '/update_kma_bonus/{bonus_id}', 'verb' => 'PUT'],
 
