@@ -193,4 +193,84 @@ class KMAUserController  extends Controller{
         $query->execute(array($id_number, $full_name, $date_of_birth, $gender, $phone, $address, $email, $position_id, $salary, $coefficients_salary, $tax, $day_joined, $communist_party_joined, $communist_party_confirmed, $unit_id, $kma_uid));
         return new JSONResponse(array('status' => 'success'));
     }
+
+
+
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     *
+     * @param string $userId
+     */
+    public function getKMAUserbyPosition($position_id) {
+        $query = $this->db->getQueryBuilder();
+        $query->select('*')
+            ->from('kma_user')
+            ->where($query->expr()->eq('position_id', $query->createNamedParameter($position_id)));
+
+        $result = $query->execute();
+        $data = $result->fetch();
+        if ($data === false) {
+            return new DataResponse([], Http::STATUS_NOT_FOUND);
+        }
+        return new DataResponse([
+            'Usename' => $data['kma_uid'],
+            'Ho va Ten' => $data['full_name'],
+            'Ngay sinh' => $data['date_of_birth'],
+            'Gioi tinh' => $data['gender'],
+            'So dien thoai' => $data['phone'],
+            'Dia chi' => $data['address'],
+            'CCCD/CMND' => $data['id_number'],
+            'Email' => $data['email'],
+            'Ma chuc vu' => $data['position_id'],
+            'Luong co so' => $data['salary'],
+            'He so luong' => $data['coefficients_salary'],
+            'Muc thue' => $data['tax'],
+            'Ngay vao Dang' => $data['communist_party_joined'],
+            'Ngay vao Dang chinh thuc' => $data['communist_party_confirmed'],
+            'Ma don vi' => $data['unit_id'],
+            // Add other desired user information here
+        ]);
+    }
+
+
+
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     *
+     * @param string $userId
+     */
+    public function getKMAUserbyUnit($unit_id) {
+        $query = $this->db->getQueryBuilder();
+        $query->select('*')
+            ->from('kma_user')
+            ->where($query->expr()->eq('unit_id', $query->createNamedParameter($unit_id)));
+
+        $result = $query->execute();
+        $data = $result->fetch();
+        if ($data === false) {
+            return new DataResponse([], Http::STATUS_NOT_FOUND);
+        }
+        return new DataResponse([
+            'Usename' => $data['kma_uid'],
+            'Ho va Ten' => $data['full_name'],
+            'Ngay sinh' => $data['date_of_birth'],
+            'Gioi tinh' => $data['gender'],
+            'So dien thoai' => $data['phone'],
+            'Dia chi' => $data['address'],
+            'CCCD/CMND' => $data['id_number'],
+            'Email' => $data['email'],
+            'Ma chuc vu' => $data['position_id'],
+            'Luong co so' => $data['salary'],
+            'He so luong' => $data['coefficients_salary'],
+            'Muc thue' => $data['tax'],
+            'Ngay vao Dang' => $data['communist_party_joined'],
+            'Ngay vao Dang chinh thuc' => $data['communist_party_confirmed'],
+            'Ma don vi' => $data['unit_id'],
+            // Add other desired user information here
+        ]);
+    }
+
 }

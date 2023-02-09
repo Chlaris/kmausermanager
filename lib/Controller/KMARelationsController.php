@@ -59,33 +59,33 @@ class KMARelationsController extends Controller{
         ]);
     }	
 
-    // /**
-    //  * @NoAdminRequired
-    //  * @NoCSRFRequired
-    //  *
-    //  * @param string $userId
-    //  */
-    // public function getKMARelationById($kma_uid) {
-    //     $query = $this->db->getQueryBuilder();
-    //     $query->select('*')
-    //         ->from('kma_relations')
-    //         ->where($query->expr()->eq('$kma_uid', $query->createNamedParameter($kma_uid)));
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     *
+     * @param string $kma_uid
+     */
+    public function getKMARelationBykmaUID($kma_uid) {
+        $query = $this->db->getQueryBuilder();
+        $query->select('*')
+            ->from('kma_relations')
+            ->where($query->expr()->eq('kma_uid', $query->createNamedParameter($kma_uid)));
 
-    //     $result = $query->execute();
-    //     $data = $result->fetch();
-    //     if ($data === false) {
-    //         return new DataResponse([], Http::STATUS_NOT_FOUND);
-    //     }
-    //     return new DataResponse([
-    //         'Ma nguoi than' => $data['relations_id'],
-    //         'Ma can bo' => $data['kma_uid'],
-    //         'Ho va Ten' => $data['  = null'],
-    //         'Ngay sinh' => $data['date_of_birth'],
-    //         'So dien thoai' => $data['phone'],
-    //         'Dia chi' => $data['address'],
-    //         // Add other desired user information here
-    //     ]);
-    // }
+        $result = $query->execute();
+        $data = $result->fetch();
+        if ($data === false) {
+            return new DataResponse([], Http::STATUS_NOT_FOUND);
+        }
+        return new DataResponse([
+            'Ma nguoi than' => $data['relations_id'],
+            'Ma can bo' => $data['kma_uid'],
+            'Ho va Ten' => $data['  = null'],
+            'Ngay sinh' => $data['date_of_birth'],
+            'So dien thoai' => $data['phone'],
+            'Dia chi' => $data['address'],
+            // Add other desired user information here
+        ]);
+    }
     
     /**
      * @NoAdminRequired

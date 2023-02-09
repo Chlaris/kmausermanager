@@ -60,7 +60,37 @@ class KMAEducationController extends Controller{
             // Add other desired user information here
         ]);
     }	
-    
+
+        /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     *
+     * @param string $kma_uid
+     */
+    public function getKMAEducationByUID($kma_uid) {
+        $query = $this->db->getQueryBuilder();
+        $query->select('*')
+            ->from('kma_education')
+            ->where($query->expr()->eq('kma_uid', $query->createNamedParameter($kma_uid)));
+
+        $result = $query->execute();
+        $data = $result->fetch();
+        if ($data === false) {
+            return new DataResponse([], Http::STATUS_NOT_FOUND);
+        }
+        return new DataResponse([
+            'Ma dao tao' => $data['education_id'],
+            'Ma can bo' => $data['kma_uid'],
+            'Nam tot nghiep' => $data['graduate_time'],
+            'Ngay bat dau' => $data['admision_time'],
+            'Don vi dao tao' => $data['training_unit'],
+            'Chuyen nganh' => $data['specialization'],
+            'Van bang' => $data['diploma'],
+            'Ket qua' => $data['graduated_with'],
+            // Add other desired user information here
+        ]);
+    }	
+
     /**
      * @NoAdminRequired
      * @NoCSRFRequired

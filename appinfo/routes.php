@@ -19,6 +19,8 @@ return [
 		// ['name' => 'KMAUser#sayHi', 'url' => '/sayhi', 'verb' => 'GET'],
 		['name' => 'KMAUser#getAllKMAUser', 'url' => '/all_kma_user', 'verb' => 'GET'],
 		['name' => 'KMAUser#getKMAUser', 'url' => '/kma_user/{kma_uid}', 'verb' => 'GET'],
+		['name' => 'KMAUser#getKMAUserbyPosition', 'url' => '/kma_user_by_position/{position_id}', 'verb' => 'GET'],
+		['name' => 'KMAUser#getKMAUserbyUnit', 'url' => '/kma_user_by_unit/{unit_id}', 'verb' => 'GET'],
 		['name' => 'KMAUser#createKMAUser', 'url' => '/create_kma_user', 'verb' => 'POST'],
 		['name' => 'KMAUser#deleteKMAUser', 'url' => '/delete_kma_user/{kma_uid}', 'verb' => 'DELETE'],
 		['name' => 'KMAUser#updateInfoKMAUser', 'url' => '/update_kma_user/{kma_uid}', 'verb' => 'PUT'],
@@ -27,7 +29,7 @@ return [
 		#Nguoithan
 		['name' => 'KMARelations#getAllKMARelations', 'url' => '/all_kma_relations', 'verb' => 'GET'],
 		['name' => 'KMARelations#getKMARelation', 'url' => '/kma_relation/{relations_id}', 'verb' => 'GET'],
-		// ['name' => 'KMARelations#getKMARelationById', 'url' => '/kma_relation{kma_uid}', 'verb' => 'GET'],
+		['name' => 'KMARelations#getKMARelationBykmaUID', 'url' => '/kma_relation_by_uid/{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMARelations#createKMARelation', 'url' => '/create_kma_relation', 'verb' => 'POST'],
 		['name' => 'KMARelations#deleteKMARelation', 'url' => '/delete_kma_relation/{relations_id}', 'verb' => 'DELETE'],
 		['name' => 'KMARelations#updateInfoKMARelation', 'url' => '/update_kma_relation/{relations_id}', 'verb' => 'PUT'],
@@ -36,6 +38,7 @@ return [
 		['name' => 'KMAEducation#createKMAEducation', 'url' => '/create_kma_education', 'verb' => 'POST'],
 		['name' => 'KMAEducation#getAllKMAEducation', 'url' => '/all_kma_educations', 'verb' => 'GET'],
 		['name' => 'KMAEducation#getKMAEducation', 'url' => '/kma_education/{education_id}', 'verb' => 'GET'],
+		['name' => 'KMAEducation#getKMAEducationByUID', 'url' => '/kma_education_by_uid/{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMAEducation#updateInfoKMAEducation', 'url' => '/update_kma_education/{education_id}', 'verb' => 'PUT'],
 		['name' => 'KMAEducation#deleteKMAEducation', 'url' => '/delete_kma_education/{education_id}', 'verb' => 'DELETE'],
 
@@ -43,6 +46,7 @@ return [
 		['name' => 'KMABusiness#createKMABusiness', 'url' => '/create_kma_business', 'verb' => 'POST'],
 		['name' => 'KMABusiness#getAllKMABusiness', 'url' => '/all_kma_businesses', 'verb' => 'GET'],
 		['name' => 'KMABusiness#getKMABusiness', 'url' => '/kma_business/{business_id}', 'verb' => 'GET'],
+		['name' => 'KMABusiness#getKMABusinessByUID', 'url' => '/kma_business_by_uid/{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMABusiness#deleteKMABusiness', 'url' => '/delete_kma_business/{business_id}', 'verb' => 'DELETE'],
 		['name' => 'KMABusiness#updateInfoKMABusiness', 'url' => '/update_kma_business/{business_id}', 'verb' => 'PUT'],
 
