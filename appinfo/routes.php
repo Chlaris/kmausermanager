@@ -16,7 +16,7 @@ return [
 		['name' => 'page#do_echo', 'url' => '/echo', 'verb' => 'POST'],
 
 		#Canbo
-		['name' => 'KMAUser#sayHi', 'url' => '/sayhi', 'verb' => 'GET'],
+		// ['name' => 'KMAUser#sayHi', 'url' => '/sayhi', 'verb' => 'GET'],
 		['name' => 'KMAUser#getAllKMAUser', 'url' => '/all_kma_user', 'verb' => 'GET'],
 		['name' => 'KMAUser#getKMAUser', 'url' => '/kma_user/{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMAUser#createKMAUser', 'url' => '/create_kma_user', 'verb' => 'POST'],
@@ -30,20 +30,21 @@ return [
 		// ['name' => 'KMARelations#getKMARelationById', 'url' => '/kma_relation{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMARelations#createKMARelation', 'url' => '/create_kma_relation', 'verb' => 'POST'],
 		['name' => 'KMARelations#deleteKMARelation', 'url' => '/delete_kma_relation/{relations_id}', 'verb' => 'DELETE'],
-		['name' => 'KMARelations#updateInfoKMARelation', 'url' => '/update_kma_relation/{relations_id}', 'verb' => 'PUT'],
+		// ['name' => 'KMARelations#updateInfoKMARelation', 'url' => '/update_kma_relation/{relations_id}', 'verb' => 'PUT'],
 
 		#Daotao
 		['name' => 'KMAEducation#createKMAEducation', 'url' => '/create_kma_education', 'verb' => 'POST'],
 		['name' => 'KMAEducation#getAllKMAEducation', 'url' => '/all_kma_educations', 'verb' => 'GET'],
 		['name' => 'KMAEducation#getKMAEducation', 'url' => '/kma_education/{education_id}', 'verb' => 'GET'],
 		['name' => 'KMAEducation#updateInfoKMAEducation', 'url' => '/update_kma_education/{education_id}', 'verb' => 'PUT'],
-		['name' => 'KMAEducation#deleteKMAEducation', 'url' => '/delete_kma_education/{education_id}', 'verb' => 'DELETE'],
+		// ['name' => 'KMAEducation#deleteKMAEducation', 'url' => '/delete_kma_education/{education_id}', 'verb' => 'DELETE'],
 
 		#Congtac
 		['name' => 'KMABusiness#createKMABusiness', 'url' => '/create_kma_business', 'verb' => 'POST'],
 		['name' => 'KMABusiness#getAllKMABusiness', 'url' => '/all_kma_businesses', 'verb' => 'GET'],
-		['name' => 'KMABusiness#getKMABusiness', 'url' => '/kma_business/{business}', 'verb' => 'GET'],
-		
+		['name' => 'KMABusiness#getKMABusiness', 'url' => '/kma_business/{business_id}', 'verb' => 'GET'],
+		['name' => 'KMABusiness#deleteKMABusiness', 'url' => '/delete_kma_business/{business_id}', 'verb' => 'DELETE'],
+		// ['name' => 'KMABusiness#updateInfoKMABusiness', 'url' => '/update_kma_business/{business_id}', 'verb' => 'PUT'],
 
 		#Chucvu
 		['name' => 'KMAPosition#createKMAPosition', 'url' => '/create_kma_position', 'verb' => 'POST'],
@@ -60,11 +61,11 @@ return [
 		// ['name' => 'KMAUnit#updateInfoKMAUnit', 'url' => '/update_kma_unit/{unit_id}', 'verb' => 'PUT'],
 
 		#Khenthuong-Kyluat
-		['name' => 'KMAUnit#createKMABonus', 'url' => '/create_kma_bonus', 'verb' => 'POST'],
+		['name' => 'KMABonus#createKMABonus', 'url' => '/create_kma_bonus', 'verb' => 'POST'],
 		['name' => 'KMABonus#getAllKMABonuses', 'url' => '/all_kma_bonuses', 'verb' => 'GET'],
 		['name' => 'KMABonus#getKMABonus', 'url' => '/kma_bonus/{bonus_id}', 'verb' => 'GET'],
 		['name' => 'KMABonus#deleteKMABonus', 'url' => '/delete_kma_bonus/{bonus_id}', 'verb' => 'DELETE'],
-		// ['name' => 'KMABonus#updateInfoKMABonus', 'url' => '/update_kma_bonus/{bonus_id}', 'verb' => 'PUT'],
+		['name' => 'KMABonus#updateInfoKMABonus', 'url' => '/update_kma_bonus/{bonus_id}', 'verb' => 'PUT'],
 
     ],
 ];

@@ -126,16 +126,17 @@ class KMABonusController extends Controller{
      * @param string $type
      * @return JSONResponse
      */
-    public function updateInfoKMABonus($bonus_id, $form = null, $time  = null, $reason = null, $number_decision, $department_decision, $kma_uid, $type) {
+    public function updateInfoKMABonus($bonus_id, $form = null, $time  = null, $reason = null, $number_decision = null, $department_decision = null, $kma_uid = null, $type = null) {
         $query = $this->db->prepare('UPDATE `oc_kma_bonus` SET `form` = COALESCE(?, `form`), 
                                                             `time` = COALESCE(?, `time`), 
                                                             `reason` = COALESCE(?, `reason`), 
                                                             `number_decision` = COALESCE(?, `number_decision`), 
                                                             `department_decision` = COALESCE(?, `department_decision`), 
                                                             `kma_uid` = COALESCE(?, `kma_uid`), 
-                                                            `type` = COALESCE(?, `type`), 
+                                                            `type` = COALESCE(?, `type`)
                                                                 WHERE `bonus_id` = ?');
         $query->execute(array($bonus_id, $form, $time, $reason, $number_decision, $department_decision, $kma_uid, $type));
         return new JSONResponse(array('status' => 'success'));
+        // return new JSONResponse(array($bonus_id, $form, $time, $reason, $number_decision, $department_decision, $kma_uid, $type));
     }
 }
