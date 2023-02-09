@@ -118,13 +118,13 @@ class KMABusinessController  extends Controller{
      * @return JSONResponse
      */
     public function updateInfoKMABusiness($business_id, $kma_uid = null, $start_time = null, $end_time  = null, $unit = null, $position = null) {
-        $query = $this->db->prepare('UPDATE `oc_kma_business` SET `start_time` = COALESCE(?, `start_time`), 
+        $query = $this->db->prepare('UPDATE `oc_kma_business` SET `kma_uid` = COALESCE(?, `kma_uid`),
+                                                            `start_time` = COALESCE(?, `start_time`), 
                                                             `end_time` = COALESCE(?, `end_time`),
                                                             `unit` = COALESCE(?, `unit`),
-                                                            `position` = COALESCE(?, `position`),
-                                                            `kma_uid` = COALESCE(?, `kma_uid`),
+                                                            `position` = COALESCE(?, `position`)
                                                                 WHERE `business_id` = ?');
-        $query->execute(array($business_id, $kma_uid, $start_time, $end_time, $unit, $position));
+        $query->execute(array($kma_uid, $start_time, $end_time, $unit, $position, $business_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

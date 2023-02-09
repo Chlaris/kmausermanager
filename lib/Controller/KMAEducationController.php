@@ -127,9 +127,9 @@ class KMAEducationController extends Controller{
                                                             `training_unit` = COALESCE(?, `training_unit`),
                                                             `specialization` = COALESCE(?, `specialization`),
                                                             `diploma` = COALESCE(?, `diploma`), 
-                                                            `graduated_with` = COALESCE(?, `graduated_with`), 
+                                                            `graduated_with` = COALESCE(?, `graduated_with`) 
                                                                 WHERE `education_id` = ?');
-        $query->execute(array($relations_id, $graduate_time, $admision_time, $training_unit, $specialization, $diploma, $graduated_with, $kma_uid));
+        $query->execute(array($kma_uid, $graduate_time, $admision_time, $training_unit, $specialization, $diploma, $graduated_with, $education_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

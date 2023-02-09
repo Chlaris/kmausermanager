@@ -114,9 +114,9 @@ class KMAPositionController  extends Controller{
     public function updateInfoKMAPosition($position_id, $position_name = null, $allowance  = null, $remark = null) {
         $query = $this->db->prepare('UPDATE `oc_kma_position` SET `position_name` = COALESCE(?, `position_name`), 
                                                             `allowance` = COALESCE(?, `allowance`), 
-                                                            `remark` = COALESCE(?, `remark`), 
+                                                            `remark` = COALESCE(?, `remark`)
                                                                 WHERE `position_id` = ?');
-        $query->execute(array($position_id, $position_name, $allowance, $remark));
+        $query->execute(array($position_name, $allowance, $remark, $position_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

@@ -115,17 +115,17 @@ class KMAUnitController  extends Controller{
      * @param string $description
 	 * @param string $chief_unit
      * @param string $deputy_unit
-     * @param string $parent_id
+     * @param string $parent_unit
      * @return JSONResponse
      */
-    public function updateInfoKMAUnit($unit_id, $unit_name = null, $description  = null, $chief_unit = null, $deputy_unit = null, $parent_id = null) {
+    public function updateInfoKMAUnit($unit_id, $unit_name = null, $description  = null, $chief_unit = null, $deputy_unit = null, $parent_unit = null) {
         $query = $this->db->prepare('UPDATE `oc_kma_unit` SET `unit_name` = COALESCE(?, `unit_name`), 
-                                                            `description` = COALESCE(?, `description`), 
-                                                            `chief_unit` = COALESCE(?, `chief_unit`), 
-                                                            `deputy_unit` = COALESCE(?, `deputy_unit`), 
-                                                            `parent_id` = COALESCE(?, `parent_id`),
-                                                                WHERE `unit_id` = ?');
-        $query->execute(array($unit_id, $unit_name, $description, $chief_unit, $deputy_unit, $parent_id));
+                                                        `description` = COALESCE(?, `description`), 
+                                                        `chief_unit` = COALESCE(?, `chief_unit`), 
+                                                        `deputy_unit` = COALESCE(?, `deputy_unit`), 
+                                                        `parent_unit` = COALESCE(?, `parent_unit`)
+                                                            WHERE `unit_id` = ?');
+        $query->execute(array($unit_name, $description, $chief_unit, $deputy_unit, $parent_unit, $unit_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

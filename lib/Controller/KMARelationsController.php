@@ -151,7 +151,7 @@ class KMARelationsController extends Controller{
                                                             `address` = COALESCE(?, `address`),
                                                             `relationship` = COALESCE(?, `relationship`)
                                                                 WHERE `relations_id` = ?');
-        $query->execute(array($relations_id, $full_name, $date_of_birth, $phone, $address, $relationship, $kma_uid));
+        $query->execute(array( $kma_uid, $full_name, $date_of_birth, $phone, $address, $relationship, $relations_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

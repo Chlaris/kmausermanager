@@ -30,35 +30,35 @@ return [
 		// ['name' => 'KMARelations#getKMARelationById', 'url' => '/kma_relation{kma_uid}', 'verb' => 'GET'],
 		['name' => 'KMARelations#createKMARelation', 'url' => '/create_kma_relation', 'verb' => 'POST'],
 		['name' => 'KMARelations#deleteKMARelation', 'url' => '/delete_kma_relation/{relations_id}', 'verb' => 'DELETE'],
-		// ['name' => 'KMARelations#updateInfoKMARelation', 'url' => '/update_kma_relation/{relations_id}', 'verb' => 'PUT'],
+		['name' => 'KMARelations#updateInfoKMARelation', 'url' => '/update_kma_relation/{relations_id}', 'verb' => 'PUT'],
 
 		#Daotao
 		['name' => 'KMAEducation#createKMAEducation', 'url' => '/create_kma_education', 'verb' => 'POST'],
 		['name' => 'KMAEducation#getAllKMAEducation', 'url' => '/all_kma_educations', 'verb' => 'GET'],
 		['name' => 'KMAEducation#getKMAEducation', 'url' => '/kma_education/{education_id}', 'verb' => 'GET'],
 		['name' => 'KMAEducation#updateInfoKMAEducation', 'url' => '/update_kma_education/{education_id}', 'verb' => 'PUT'],
-		// ['name' => 'KMAEducation#deleteKMAEducation', 'url' => '/delete_kma_education/{education_id}', 'verb' => 'DELETE'],
+		['name' => 'KMAEducation#deleteKMAEducation', 'url' => '/delete_kma_education/{education_id}', 'verb' => 'DELETE'],
 
 		#Congtac
 		['name' => 'KMABusiness#createKMABusiness', 'url' => '/create_kma_business', 'verb' => 'POST'],
 		['name' => 'KMABusiness#getAllKMABusiness', 'url' => '/all_kma_businesses', 'verb' => 'GET'],
 		['name' => 'KMABusiness#getKMABusiness', 'url' => '/kma_business/{business_id}', 'verb' => 'GET'],
 		['name' => 'KMABusiness#deleteKMABusiness', 'url' => '/delete_kma_business/{business_id}', 'verb' => 'DELETE'],
-		// ['name' => 'KMABusiness#updateInfoKMABusiness', 'url' => '/update_kma_business/{business_id}', 'verb' => 'PUT'],
+		['name' => 'KMABusiness#updateInfoKMABusiness', 'url' => '/update_kma_business/{business_id}', 'verb' => 'PUT'],
 
 		#Chucvu
 		['name' => 'KMAPosition#createKMAPosition', 'url' => '/create_kma_position', 'verb' => 'POST'],
 		['name' => 'KMAPosition#getAllKMAPositions', 'url' => '/all_kma_positions', 'verb' => 'GET'],
 		['name' => 'KMAPosition#getKMAPosition', 'url' => '/kma_position/{position_id}', 'verb' => 'GET'],
 		['name' => 'KMAPosition#deleteKMAPosition', 'url' => '/delete_kma_position/{position_id}', 'verb' => 'DELETE'],
-		// ['name' => 'KMAPosition#updateInfoKMAPosition', 'url' => '/update_kma_position/{position_id}', 'verb' => 'PUT'],
+		['name' => 'KMAPosition#updateInfoKMAPosition', 'url' => '/update_kma_position/{position_id}', 'verb' => 'PUT'],
 
 		#Donvi
 		['name' => 'KMAUnit#createKMAUnit', 'url' => '/create_kma_unit', 'verb' => 'POST'],
 		['name' => 'KMAUnit#getAllKMAUnit', 'url' => '/all_kma_units', 'verb' => 'GET'],
 		['name' => 'KMAUnit#getKMAUnit', 'url' => '/kma_unit/{unit_id}', 'verb' => 'GET'],
 		['name' => 'KMAUnit#deleteKMAUnit', 'url' => '/delete_kma_unit/{unit_id}', 'verb' => 'DELETE'],
-		// ['name' => 'KMAUnit#updateInfoKMAUnit', 'url' => '/update_kma_unit/{unit_id}', 'verb' => 'PUT'],
+		['name' => 'KMAUnit#updateInfoKMAUnit', 'url' => '/update_kma_unit/{unit_id}', 'verb' => 'PUT'],
 
 		#Khenthuong-Kyluat
 		['name' => 'KMABonus#createKMABonus', 'url' => '/create_kma_bonus', 'verb' => 'POST'],
