@@ -7,9 +7,19 @@ use OCP\AppFramework\Http\DataResponse;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
+use OCP\AppFramework\OCS\OCSNotFoundException;
 
 class KMAUserController  extends Controller{
     private $db;
+
+    // /** @var IUserManager */
+	// protected $userManager;
+
+    // public function __construct($AppName, IRequest $request, IDBConnection $db, IUserManager $userManager) {
+    //     parent::__construct($AppName, $request);
+    //     $this->db = $db;
+    //     $this->userManager = $userManager;
+    // }
 
     public function __construct($AppName, IRequest $request, IDBConnection $db) {
         parent::__construct($AppName, $request);
@@ -45,8 +55,6 @@ class KMAUserController  extends Controller{
         $users = $result->fetchAll();
         return ['users' => $users];
     }
-
-
 
     /**
      * @NoAdminRequired
@@ -108,6 +116,16 @@ class KMAUserController  extends Controller{
      * @param string $unit_id
      */
     public function createKMAUser($kma_uid, $full_name, $date_of_birth, $gender, $phone, $address, $id_number, $email, $position_id, $salary, $coefficients_salary, $tax, $day_joined, $communist_party_joined, $communist_party_confirmed, $unit_id) {
+        $user = $this->db->getQueryBuilder();
+        $user->select('*')
+            ->from('accounts')
+            ->where($user->expr()->eq('uid', $user->createNamedParameter($kma_uid)));
+        $result = $user->execute();
+        $data = $result->fetch();
+        if ($data === false) {
+            return new DataResponse(["Don't have this account"], Http::STATUS_NOT_FOUND);
+        }
+
         $query = $this->db->getQueryBuilder();
         $query->insert('kma_user')
             ->values([
@@ -127,7 +145,6 @@ class KMAUserController  extends Controller{
                 'communist_party_joined' => $query->createNamedParameter($communist_party_joined),
                 'communist_party_confirmed' => $query->createNamedParameter($communist_party_confirmed),
                 'unit_id' => $query->createNamedParameter($unit_id),
-
                 // Add other desired columns here
             ])
             ->execute();

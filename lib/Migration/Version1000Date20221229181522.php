@@ -117,7 +117,7 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 				'notnull' => false,
 			]);
 
-			$table->addColumn('unit_id', 'string', [
+			$table->addColumn('unit_id', 'integer', [
 				'unsigned' => true
 			]);
 
@@ -150,7 +150,8 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 
 			$table->addColumn('kma_uid', 'string', [
-				'unsigned' => true
+				'unsigned' => true,
+				'length' => 64,
 			]);
 
 			$table->addColumn('full_name', 'string', [
@@ -197,7 +198,8 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 
 			$table->addColumn('kma_uid', 'string', [
-				'unsigned' => true
+				'unsigned' => true,
+				'length' => 64,
 			]);
 
 			$table->addColumn('graduate_time', 'date', [
@@ -249,7 +251,8 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 
 			$table->addColumn('kma_uid', 'string', [
-				'unsigned' => true
+				'unsigned' => true,
+				'length' => 64,
 			]);
 
 			$table->addColumn('start_time', 'date', [
@@ -326,14 +329,16 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 
 			$table->addColumn('chief_unit', 'string', [
-				'unsigned' => true
+				'unsigned' => true, 
+				'length' => 64
 			]);
 
 			$table->addColumn('deputy_unit', 'string', [
-				'unsigned' => true
+				'unsigned' => true,
+				'length' => 64
 			]);
 
-			$table->addColumn('parent_unit', 'string', [
+			$table->addColumn('parent_unit', 'integer', [
 				'unsigned' => true
 			]);
 
@@ -348,7 +353,8 @@ class Version1000Date20221229181522 extends SimpleMigrationStep {
 			]);
 
 			$table->addColumn('kma_uid', 'string', [
-				'unsigned' => true
+				'unsigned' => true, 
+				'length' => 64,
 			]);
 
 			$table->addColumn('type', 'boolean', [

@@ -21,7 +21,7 @@ class KMACellController  extends Controller{
      * @NoAdminRequired
      * @NoCSRFRequired
      */
-    public function getAllKMACell() {
+    public function getAllKMACells() {
         $query = $this->db->getQueryBuilder();
         $query->select('*')
             ->from('kma_cell');
@@ -79,7 +79,7 @@ class KMACellController  extends Controller{
      */
     public function createKMACell($cell_id, $cell_name, $description, $unit_id, $secretary_id, $vice_secretary_id, $executive_committee_1st, $executive_committee_2nd) {
         $query = $this->db->getQueryBuilder();
-        $query->insert('kma_position')
+        $query->insert('kma_cell')
             ->values([
                 'cell_id' => $query->createNamedParameter($cell_id),
                 'cell_name' => $query->createNamedParameter($cell_name),
@@ -102,7 +102,7 @@ class KMACellController  extends Controller{
      *
      * @param string $cell_id
      */
-    public function deleteKMACell($pcell_id) {
+    public function deleteKMACell($cell_id) {
         $query = $this->db->getQueryBuilder();
         $query->delete('kma_cell')
             ->where($query->expr()->eq('cell_id', $query->createNamedParameter($cell_id)))
@@ -126,16 +126,16 @@ class KMACellController  extends Controller{
      * @param string $executive_committee_2nd
      * @return JSONResponse
      */
-    public function updateInfoKMAPosition($cell_id, $cell_name = null, $description  = null, $unit_id = null, $secretary_id = null, $vice_secretary_id = null, $executive_committee_1st = null, $executive_committee_2nd = null) {
-        $query = $this->db->prepare('UPDATE `oc_kma_position` SET `cell_name` = COALESCE(?, `cell_name`), 
+    public function updateInfoKMACell($cell_id, $cell_name = null, $description  = null, $unit_id = null, $secretary_id = null, $vice_secretary_id = null, $executive_committee_1st = null, $executive_committee_2nd = null) {
+        $query = $this->db->prepare('UPDATE `oc_kma_cell` SET `cell_name` = COALESCE(?, `cell_name`), 
                                                             `description` = COALESCE(?, `description`), 
                                                             `unit_id` = COALESCE(?, `unit_id`),
                                                             `secretary_id` = COALESCE(?, `secretary_id`),
                                                             `vice_secretary_id` = COALESCE(?, `vice_secretary_id`),
                                                             `executive_committee_1st` = COALESCE(?, `executive_committee_1st`),
-                                                            `executive_committee_2nd` = COALESCE(?, `executive_committee_2nd`),
+                                                            `executive_committee_2nd` = COALESCE(?, `executive_committee_2nd`)
                                                                 WHERE `cell_id` = ?');
-        $query->execute(array($cell_id, $cell_name, $description, $unit_id, $secretary_id, $vice_secretary_id, $executive_committee_1st, $executive_committee_2nd));
+        $query->execute(array($cell_name, $description, $unit_id, $secretary_id, $vice_secretary_id, $executive_committee_1st, $executive_committee_2nd, $cell_id));
         return new JSONResponse(array('status' => 'success'));
     }
 }

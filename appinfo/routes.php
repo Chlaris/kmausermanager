@@ -69,8 +69,16 @@ return [
 		['name' => 'KMABonus#getAllKMABonuses', 'url' => '/all_kma_bonuses', 'verb' => 'GET'],
 		['name' => 'KMABonus#getKMABonus', 'url' => '/kma_bonus/{bonus_id}', 'verb' => 'GET'],
 		['name' => 'KMABonus#getKMABonusbyUID', 'url' => '/kma_bonus_by_uid/{kma_uid}', 'verb' => 'GET'],
+		['name' => 'KMABonus#getKMABonusbytype', 'url' => '/kma_bonus_by_type/{type}', 'verb' => 'GET'],
 		['name' => 'KMABonus#deleteKMABonus', 'url' => '/delete_kma_bonus/{bonus_id}', 'verb' => 'DELETE'],
 		['name' => 'KMABonus#updateInfoKMABonus', 'url' => '/update_kma_bonus/{bonus_id}', 'verb' => 'PUT'],
+
+		#Chibo
+		['name' => 'KMACell#createKMACell', 'url' => '/create_kma_cell', 'verb' => 'POST'],
+		['name' => 'KMACell#getAllKMACells', 'url' => '/all_kma_cells', 'verb' => 'GET'],
+		['name' => 'KMACell#getKMACell', 'url' => '/kma_cell/{cell_id}', 'verb' => 'GET'],
+		['name' => 'KMACell#deleteKMACell', 'url' => '/delete_kma_cell/{cell_id}', 'verb' => 'DELETE'],
+		['name' => 'KMACell#updateInfoKMACell', 'url' => '/update_kma_cell/{cell_id}', 'verb' => 'PUT'],
 
     ],
 ];
