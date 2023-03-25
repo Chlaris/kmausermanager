@@ -9,22 +9,28 @@ use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http;
 use OCP\AppFramework\OCS\OCSNotFoundException;
 
+use OCP\IUserSession;
+use OCP\IGroupManager;
+
 class KMAUserController  extends Controller{
     private $db;
 
-    // /** @var IUserManager */
-	// protected $userManager;
+    /** @var IUserSession */
+	protected $userSession;
+    /** @var IGroupManager|Manager */ // FIXME Requires a method that is not on the interface
+	protected $groupManager;
 
-    // public function __construct($AppName, IRequest $request, IDBConnection $db, IUserManager $userManager) {
+    public function __construct($AppName, IRequest $request, IDBConnection $db, IUserSession $userSession, IGroupManager $groupManager) {
+        parent::__construct($AppName, $request, $userSession, $groupManager);
+        $this->db = $db;
+        $this->userSession = $userSession;
+        $this->groupManager = $groupManager;
+    }
+
+    // public function __construct($AppName, IRequest $request, IDBConnection $db) {
     //     parent::__construct($AppName, $request);
     //     $this->db = $db;
-    //     $this->userManager = $userManager;
     // }
-
-    public function __construct($AppName, IRequest $request, IDBConnection $db) {
-        parent::__construct($AppName, $request);
-        $this->db = $db;
-    }
 
 	/**
 	 * CAUTION: the @Stuff turns off security checks; for this page no admin is
@@ -116,39 +122,49 @@ class KMAUserController  extends Controller{
      * @param string $unit_id
      */
     public function createKMAUser($kma_uid, $full_name, $date_of_birth, $gender, $phone, $address, $id_number, $email, $position_id, $salary, $coefficients_salary, $tax, $day_joined, $communist_party_joined, $communist_party_confirmed, $unit_id) {
-        $user = $this->db->getQueryBuilder();
-        $user->select('*')
-            ->from('accounts')
-            ->where($user->expr()->eq('uid', $user->createNamedParameter($kma_uid)));
-        $result = $user->execute();
-        $data = $result->fetch();
-        if ($data === false) {
-            return new DataResponse(["Don't have this account"], Http::STATUS_NOT_FOUND);
-        }
+        $currentUser = $this->userSession->getUser();
+        $uid = $currentUser->getUID();
 
-        $query = $this->db->getQueryBuilder();
-        $query->insert('kma_user')
-            ->values([
-                'kma_uid' => $query->createNamedParameter($kma_uid),
-                'full_name' => $query->createNamedParameter($full_name),
-                'date_of_birth' => $query->createNamedParameter($date_of_birth),
-                'gender' => $query->createNamedParameter($gender),
-                'phone' => $query->createNamedParameter($phone),
-                'address' => $query->createNamedParameter($address),
-                'id_number' => $query->createNamedParameter($id_number),
-                'email' => $query->createNamedParameter($email),
-                'position_id' => $query->createNamedParameter($position_id),
-                'salary' => $query->createNamedParameter($salary),
-                'coefficients_salary' => $query->createNamedParameter($coefficients_salary),
-                'tax' => $query->createNamedParameter($tax),
-                'day_joined' => $query->createNamedParameter($day_joined),
-                'communist_party_joined' => $query->createNamedParameter($communist_party_joined),
-                'communist_party_confirmed' => $query->createNamedParameter($communist_party_confirmed),
-                'unit_id' => $query->createNamedParameter($unit_id),
-                // Add other desired columns here
-            ])
-            ->execute();
-        return new DataResponse(['status' => 'success']);
+		if ($this->groupManager->isAdmin($uid)) {
+
+            $user = $this->db->getQueryBuilder();
+            $user->select('*')
+                ->from('accounts')
+                ->where($user->expr()->eq('uid', $user->createNamedParameter($kma_uid)));
+            $result = $user->execute();
+            $data = $result->fetch();
+            if ($data === false) {
+                return new DataResponse(["Don't have this account"], Http::STATUS_NOT_FOUND);
+            }
+
+            $query = $this->db->getQueryBuilder();
+            $query->insert('kma_user')
+                ->values([
+                    'kma_uid' => $query->createNamedParameter($kma_uid),
+                    'full_name' => $query->createNamedParameter($full_name),
+                    'date_of_birth' => $query->createNamedParameter($date_of_birth),
+                    'gender' => $query->createNamedParameter($gender),
+                    'phone' => $query->createNamedParameter($phone),
+                    'address' => $query->createNamedParameter($address),
+                    'id_number' => $query->createNamedParameter($id_number),
+                    'email' => $query->createNamedParameter($email),
+                    'position_id' => $query->createNamedParameter($position_id),
+                    'salary' => $query->createNamedParameter($salary),
+                    'coefficients_salary' => $query->createNamedParameter($coefficients_salary),
+                    'tax' => $query->createNamedParameter($tax),
+                    'day_joined' => $query->createNamedParameter($day_joined),
+                    'communist_party_joined' => $query->createNamedParameter($communist_party_joined),
+                    'communist_party_confirmed' => $query->createNamedParameter($communist_party_confirmed),
+                    'unit_id' => $query->createNamedParameter($unit_id),
+                    // Add other desired columns here
+                ])
+                ->execute();
+            return new DataResponse(['status' => 'success']);
+    }
+    else {
+        return new DataResponse(['No admin']);
+    }
+        
     }
 
 
